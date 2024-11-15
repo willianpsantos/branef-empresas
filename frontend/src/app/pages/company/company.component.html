@@ -1,0 +1,43 @@
+<div class="info-buttons">
+  <button
+    class="btn primary"
+    (click)="openForm(false)">
+    Cadastrar nova empresa
+  </button>
+</div>
+
+<nz-drawer
+  [nzClosable]="true"
+  [nzMaskClosable]="false"
+  [nzVisible]="isFormOpened"
+  nzPlacement="right"
+  nzTitle="Cadastrar Empresa"
+  nzWidth="500"
+  (nzOnClose)="drawerClosed($event)">
+
+  <ng-container *nzDrawerContent>
+    <app-company-form
+      [data]="currentEditing"
+      (afterSave)="drawerFormAfterSaved($event)"
+      (canceled)="drawerFormCanceled($event)">
+    </app-company-form>
+  </ng-container>
+</nz-drawer>
+
+<app-company-filter (filterChanged)="tableFilterChanged($event)"></app-company-filter>
+
+<section class="company-table">
+    <app-nz-antd-table
+      [columns]="columns"
+      [data]="data"
+      [count]="currentListResponse.count"
+      [page]="currentPage"
+      [pageSize]="currentPageSize"
+      [loading]="isTableLoading"
+      [rowActionsAllowed]="[ 'delete', 'edit' ]"
+
+      (pageChanged)="tablePageChanged($event)"
+      (pageSizeChanged)="tablePageSizeChanged($event)"
+      (rowActionClick)="tableRowActionClick($event)">
+    </app-nz-antd-table>
+</section>

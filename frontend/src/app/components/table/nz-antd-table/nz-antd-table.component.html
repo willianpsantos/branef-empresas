@@ -1,0 +1,102 @@
+<nz-card>
+    <div class="table-buttons" *ngIf="edited.length > 0">
+        <button nz-button nzType="primary" (click)="saveChanges()">Confirmar</button>
+        <button nz-button nzType="default" (click)="cancelChanges()">Cancelar</button>
+    </div>
+
+    <nz-table
+      #basicTable
+      [nzData]="data"
+      [nzFrontPagination]="false"
+      [nzPageSize]="pageSize"
+      [nzTotal]="count"
+      [nzLoading]="loading"
+      [nzShowPagination]="true"
+      (nzPageIndexChange)="onPageIndexChange($event)"
+      (nzPageSizeChange)="onPageSizeChange($event)">
+
+        <thead>
+          <tr>
+            <th *ngFor="let column of nzColums"
+                [nzWidth]="column.width ?? null"
+                [nzSortOrder]="column.sortOrder"
+                [nzSortFn]="column.sortFn"
+                [nzSortDirections]="column.sortDirections">
+                {{ column.title }}
+            </th>
+            <th *ngIf="!readonly" style="width:5%"> Ações </th>
+          </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let item of data" class="editable-row">
+              @for (column of nzColums; track $index) {
+                <td>
+                  <span *ngIf="!column.pipe"> {{ item[column.field] }} </span>
+                  <span *ngIf="column.pipe == 'date'"> {{ item[column.field] | date:(column.format ?? 'dd/MM/yyyy') }} </span>
+                  <span *ngIf="column.pipe == 'currency'"> {{ item[column.field] | currency:(column.format ?? 'BRL') }} </span>
+                </td>
+              }
+
+              <td>
+                <!-- <button
+                  [nzDropdownMenu]="menuActions"
+                  nzShape="round"
+                  nz-button
+                  nz-dropdown
+                  nzType="default"
+                  nzTrigger="click"
+                  nzPlacement="bottomCenter">
+                  <span nz-icon [nzRotate]="90" nzType="ellipsis"></span>
+                </button>
+
+                <nz-dropdown-menu #menuActions="nzDropdownMenu">
+                  <ul nz-menu>
+                    <li
+                        nz-menu-item
+                        class="delete-menu-item"
+                        (click)="handleRowActionClick('delete', item)">
+
+                        <i nz-icon nzType="delete"></i> Excluir
+                    </li>
+                  </ul>
+                </nz-dropdown-menu> -->
+
+                <!-- Replacing nz-dropdown for material dropdown due to nz-dropdown delay and high memory comsuption -->
+                <button
+                  nzShape="round"
+                  nz-button
+                  [matMenuTriggerFor]="menu">
+                  <mat-icon>more_vert</mat-icon>
+                </button>
+
+                <mat-menu #menu="matMenu">
+                  <button
+                    *ngIf="rowActionsAllowed.includes('delete')"
+                    nz-popconfirm
+                    nzPopconfirmTitle="Deseja realmente excluir o registro?"
+                    nzPopconfirmPlacement="bottom"
+                    mat-menu-item
+                    (nzOnConfirm)="handleRowActionClick('delete', item)"
+                    style="border-radius: 8px; padding: 0px 0px 0 6px;">
+
+                    <mat-icon color="warn">delete</mat-icon>
+                    <span style="color: red;">Excluir</span>
+                  </button>
+
+                  <button
+                    *ngIf="rowActionsAllowed.includes('edit')"
+                    nz-popconfirm
+                    nzPopconfirmPlacement="bottom"
+                    mat-menu-item
+                    (click)="handleRowActionClick('edit', item)"
+                    style="border-radius: 8px; padding: 0px 0px 0 6px;">
+
+                    <mat-icon color="default">edit</mat-icon>
+                    <span style="color: blue;">Editar</span>
+                  </button>
+                </mat-menu>
+              </td>
+            </tr>
+        </tbody>
+    </nz-table>
+</nz-card>

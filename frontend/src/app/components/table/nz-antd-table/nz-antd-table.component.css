@@ -1,0 +1,34 @@
+.delete-menu-item {
+    color: red;
+}
+
+.delete-menu-item i {
+    color: red;
+}
+
+.delete-menu-item:disabled {
+    color: gray;
+}
+
+.delete-menu-item i:disabled {
+    color: gray;
+}
+
+.editable-cell {
+    position: relative;
+    padding: 5px 12px;
+    cursor: pointer;
+}
+
+.editable-row:hover .editable-cell {
+    border: 1px solid #d9d9d9;
+    border-radius: 4px;
+    padding: 4px 11px;
+}
+
+.table-buttons {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    margin-bottom: 10px;
+}

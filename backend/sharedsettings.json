@@ -1,0 +1,6 @@
+{
+  "ConnectionStrings": {
+    "WriteDb": "Server=127.0.0.1\\mcr.microsoft.com/mssql/server,1433; Database=branef; User ID=sa; Password=@P455w0rd$; Integrated Security=False; MultipleActiveResultSets=True; TrustServerCertificate=True",
+    "ReadDb": "mongodb://localhost:27017"
+  }
+}

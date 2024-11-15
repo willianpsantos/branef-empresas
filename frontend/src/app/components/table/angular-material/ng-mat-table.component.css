@@ -1,0 +1,206 @@
+.table-container {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  width: 100%;
+}
+
+.table-container table{
+  border-radius: 12px;
+}
+
+.table-container .table .thead {
+  background-color: white !important;
+}
+
+.mat-mdc-header-row {
+  background-color: rgba(236, 236, 236, 1);
+}
+
+::ng-deep.mat-mdc-header-cell {
+  font-family: Segoe UI;
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 15.96px;
+  text-transform: uppercase;
+}
+
+::ng-deep.mat-sort-header-container {
+  justify-content: flex-start;
+}
+
+.mat-mdc-table {
+  border-radius: 12px;
+  background-color: white;
+}
+
+.mat-mdc-cell {
+  font-family: Segoe UI;
+  font-size: 13px;
+  font-weight: 400;
+  line-height: 21.28px;
+  color: rgba(98, 98, 98, 1);
+}
+
+.table-container .filters-section {
+  padding: 24px 32px 24px 32px;
+  gap: 24px;
+  border-radius: 12px ;
+  border: 1px 0px 0px 0px;
+  opacity: 0px;
+  border: 1px solid rgba(241, 241, 241, 1);
+  background-color: white;
+}
+
+.table-container .filters-section .filter-header {
+  display: flex;
+  justify-content: space-between;
+}
+
+.table-container .filters-section .filter-header h3 {
+  font-family: Segoe UI;
+  font-size: 18px;
+  font-weight: 600;
+  line-height: 23.94px;
+  text-align: left;
+}
+
+.table-container .filters-section .filter-content{
+  gap: 12px;
+  display: flex;
+}
+
+.table-container .filters-section .filter-item {
+  display: flex;
+  flex-direction: column;
+}
+
+.table-container .filters-section .filter-content button{
+  width: 185px;
+  height: 40px;
+  padding: 0px 16px 0px 16px;
+  gap: 0px;
+  border-radius: 4px 0px 0px 0px;
+  border: 1px 0px 0px 0px;
+  opacity: 0px;
+  border: transparent;
+  background-color: #fff;
+  font-family: Segoe UI;
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 21.28px;
+  text-align: left;
+  color: rgba(17, 106, 181, 1);
+  cursor: pointer;
+}
+
+.table-container .filters-section .filter-item input {
+  width: 185px;
+  height: 40px;
+  padding: 0px 16px 0px 16px;
+  gap: 0px;
+  border-radius: 4px 0px 0px 0px;
+  border: 1px 0px 0px 0px;
+  opacity: 0px;
+  border: 1px solid rgba(236, 236, 236, 1);
+}
+
+.pagination-section {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 24px 32px 24px 32px;
+  gap: 24px;
+  border-radius: 0 0 12px 12px ;
+
+  border: 1px solid rgba(241, 241, 241, 1);
+  background-color: white;
+}
+
+.pagination-section .count{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 12px;
+}
+
+.pagination-section .count .page-count {
+  font-family: Segoe UI;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 21.28px;
+  text-align: left;
+}
+
+.per-page-container {
+  display: flex;
+  justify-content: center;
+}
+
+.per-page-box {
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  padding: 10px 20px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  background-color: #fff;
+}
+
+.per-page-select {
+  display: flex;
+  align-items: center;
+}
+
+.per-page-select select {
+  padding: 5px;
+  border: transparent;
+  /* border-radius: 4px; */
+  outline: none;
+}
+
+.per-page-select option {
+  padding: 5px;
+}
+
+.pagination-section .count .total-result {
+  font-family: Segoe UI;
+  font-size: 13px;
+  font-weight: 400;
+  line-height: 21.28px;
+  text-align: left;
+  color: rgba(245, 130, 31, 1);
+}
+
+.page-navigation {
+  display: flex;
+  align-items: center;
+}
+
+.page-navigation button{
+  background-color: transparent;
+  border: transparent;
+}
+
+.page-numbers {
+  display: flex;
+  gap: 5px;
+
+  button {
+    padding: 5px 10px;
+    cursor: pointer;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    transition: background-color 0.3s, color 0.3s;
+  }
+
+  button:hover {
+    background-color: #007bff; /* blue color */
+    color: white;
+  }
+
+  button.currPage {
+    background-color: #007bff; /* blue color */
+    color: white;
+  }
+}

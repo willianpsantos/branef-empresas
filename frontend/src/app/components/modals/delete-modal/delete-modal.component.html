@@ -1,0 +1,11 @@
+<nz-modal [(nzVisible)]="isVisible" [nzTitle]="'Atenção!'"
+    nzWrapClassName="custom-modal">
+    <div *nzModalContent>
+        <p>Você tem certeza que deseja excluir este item?</p>
+    </div>
+
+    <div *nzModalFooter>
+        <button nz-button nzType="default" (click)="handleCancel()">Cancelar</button>
+        <button nz-button nzType="primary" nzDanger (click)="handleOk()">Excluir</button>
+    </div>
+</nz-modal>

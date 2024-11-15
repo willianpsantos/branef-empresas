@@ -1,0 +1,63 @@
+<nz-card
+  nzTitle="Filtro"
+  class="card-filter"
+  [nzExtra]="extraTemplate"
+  [ngClass]="{'collapsed': isCollapsed}">
+
+  <form
+    nz-form
+    [nzLayout]="'inline'"
+    [formGroup]="form"
+    *ngIf="!isCollapsed">
+
+    <nz-form-item  class="filter-form-item">
+      <nz-form-control>
+        <input
+          type="text"
+          nz-input
+          nzSize="large"
+          id="name"
+          [formControlName]="'name'"
+          placeholder="Nome da empresa" />
+      </nz-form-control>
+    </nz-form-item>
+
+    <nz-form-item class="custom-form-item">
+      <nz-form-control>
+        <nz-select
+          nzShowSearch
+          id="size"
+          [formControlName]="'size'"
+          nzPlaceHolder="Tamanho da empresa"
+          nzSize="large">
+
+          <nz-option
+            *ngFor="let vl of sizes"
+            [nzValue]="vl.value"
+            [nzLabel]="vl.label">
+          </nz-option>
+        </nz-select>
+      </nz-form-control>
+    </nz-form-item>
+
+    <nz-form-item>
+      <nz-form-control>
+        <button
+          nz-button
+          nzType="link"
+          nzSize="large"
+          (click)="clearFilters()">
+          <span nz-icon nzType="close"></span>Limpar Filtros
+        </button>
+      </nz-form-control>
+    </nz-form-item>
+  </form>
+</nz-card>
+
+<ng-template #extraTemplate>
+  <img
+    src="../../../../assets/icons/filter.svg"
+    alt=""
+    (click)="toggleCollapse()"
+    style="cursor:pointer" />
+</ng-template>

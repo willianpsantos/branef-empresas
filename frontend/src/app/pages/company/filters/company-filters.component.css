@@ -1,0 +1,14 @@
+.card-filter {
+    transition: height 0.3s ease;
+    /* Transição suave para a mudança de altura */
+}
+
+.card-filter.collapsed .nz-card-body {
+    display: none;
+    /* Esconde o corpo do card quando colapsado */
+}
+
+.card-filter .nz-card-body {
+    display: block;
+    /* Garante que o corpo do card seja exibido por padrão */
+}

@@ -1,0 +1,33 @@
+.alert {
+  padding: 16px;
+  margin: 24px 0;
+  font-size: 0.8rem;
+  width: 100%;
+  box-sizing: border-box;
+  clear: both;
+  -webkit-font-smoothing: subpixel-antialiased;
+  text-align: justify;
+}
+
+.alert h1, .alert h2, .alert h3, .alert h4, .alert h5, .alert h6 {
+  font-weight: 500;
+}
+
+.alert.information {
+  background: #e6f5ff;
+  border-left: 8px solid #0181ca;
+  color: #056399;
+}
+
+.alert.danger {
+  border-left: 8px solid #d32f2f;
+  background-color: #d32f2f3d;
+  color: #c71e1e;
+
+}
+
+.alert.warning {
+  border-left: 8px solid #d1ba45;
+  background-color: #d1ba453d;
+  color: #8a781e;
+}

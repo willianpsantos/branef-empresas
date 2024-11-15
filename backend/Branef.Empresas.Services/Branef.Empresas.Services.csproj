@@ -1,0 +1,19 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <RootNamespace>Branef.Empresas.Services</RootNamespace>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="MassTransit" Version="8.3.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Branef.Empresas.Domain\Branef.Empresas.Domain.csproj" />
+    <ProjectReference Include="..\Branef.Empresas.Repositories\Branef.Empresas.Repositories.csproj" />
+  </ItemGroup>
+
+</Project>

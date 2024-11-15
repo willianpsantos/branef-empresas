@@ -1,0 +1,214 @@
+/* You can add global styles to this file, and also import other style files */
+.main-heading {
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 24px;
+    font-weight: 600;
+    line-height: 31.92px;
+    text-align: left;
+
+}
+
+.highlight {
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 21.28px;
+    text-align: left;
+
+}
+
+.label {
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 18.62px;
+    text-align: left;
+
+}
+
+.error-message {
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    color: red;
+    font-size: 14px;
+    margin-top: 4px;
+    text-align: left;
+}
+
+html,
+body {
+    height: 100%;
+    background-color: rgba(248, 248, 248, 1);
+}
+
+body {
+    margin: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.mat-mdc-dialog-container,
+.mat-mdc-dialog-container .mdc-dialog__container,
+.mat-mdc-dialog-container .mdc-dialog__surface {
+    /* max-height: inherit;
+    min-height: 90%;
+    min-width: inherit;
+    max-width: 90%; */
+    position: fixed;
+
+    left: 400px;
+    top: 100px;
+    width: 700px !important;
+    height: 80% !important;
+    /* position: absolute; */
+    overflow-x: hidden;
+}
+
+/* ::ng-deep .cdk-overlay-pane  {
+    position: absolute !important;
+    width: 1000px !important;
+} */
+::ng-deep .mat-mdc-dialog-container .mdc-dialog__surface {
+    width: 50% !important;
+    height: 50%;
+}
+
+.info-buttons {
+    display: flex;
+    align-items: center;
+}
+
+.info-buttons .btn {
+    font-family: Segoe UI;
+    font-size: 14px;
+    font-weight: 600;
+    padding: 0.5em 1em;
+    margin-left: 0.5em;
+    background-color: rgba(98, 98, 98, 0.1);
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.info-buttons .btn.info {
+    background-color: #ffffff;
+    color: #151515;
+    border: 1px solid #cacaca;
+    /* Ajuste conforme necessário */
+}
+
+.info-buttons .btn.primary {
+    background-color: #2979bb;
+    /* Ajuste conforme necessário */
+    color: white;
+}
+
+.info-buttons .btn.primary:hover {
+    background-color: #2493ee;
+}
+
+.info-buttons .btn:hover {
+    background-color: rgba(98, 98, 98, 0.2);
+}
+
+.filter-form-item .ant-form-item-control-input {
+    width: 185px;
+}
+
+.filter-form-item .ant-select,
+.filter-form-item .ant-picker,
+.filter-form-item .ant-input-number {
+    width: 100%;
+    border-color: #ECECEC;
+    background-color: #FFFFFF;
+}
+
+.info-buttons {
+    top: 18%;
+    right: 3.81%;
+}
+
+.modal-custom {
+    position: fixed;
+    right: 0;
+    top: 0;
+    margin: 0;
+    height: 100%;
+    min-width: 30%;
+    transition: right 0.3s ease;
+    overflow-y: auto;
+}
+
+.ant-drawer-body .modal-content .ant-modal-footer {
+    position: fixed;
+    right: 1.8%;
+    bottom: 0;
+    border: 0px;
+    padding-right: 0px;
+}
+
+.ant-modal {
+    padding-bottom: 0px;
+}
+
+/* .ant-modal-body{
+    height: 35rem;
+} */
+
+.modal-content .ant-table-wrapper {
+    height: 300px;
+    max-height: 300px;
+}
+
+.card-filter {
+    margin-bottom: 2%;
+}
+
+.ant-card-head {
+    border-bottom: 0px;
+}
+
+.ant-btn-icon-only {
+    border-radius: 20%;
+    line-height: 1;
+}
+
+.button-without-label {
+    height: 44px;
+    position: relative;
+    top: 40%;
+}
+
+/* Alinhar o cabeçalho e o conteúdo da coluna "Ações" à direita */
+.actions-column-header,
+.actions-column-cell {
+    text-align: right;
+    width: 80px;
+    /* Ajuste conforme necessário */
+    white-space: nowrap;
+}
+
+.ant-table-thead>tr>th.actions-column-header {
+    text-align: right !important;
+}
+
+.ant-table-tbody>tr>td.actions-column-cell {
+    text-align: right !important;
+}
+
+.bold-label {
+    font-weight: 600;
+}
+
+.ant-form-item-label>label.ant-form-item-required::before {
+    display: none !important;
+}
+
+.ant-form-item-label>label.ant-form-item-required:not(.ant-form-item-required-mark-optional)::after {
+    display: inline-block;
+    margin-left: 4px;
+    color: #ff4d4f;
+    font-size: 14px;
+    font-family: SimSun, sans-serif;
+    line-height: 1;
+    content: "*";
+}

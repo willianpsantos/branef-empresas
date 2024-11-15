@@ -1,0 +1,6 @@
+@_123Vendas.Vendas.API_HostAddress = http://localhost:5237
+
+GET {{Branef.Empresas.API_HostAddress}}/companies/
+Accept: application/json
+
+###

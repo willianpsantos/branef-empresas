@@ -1,0 +1,15 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <RootNamespace>Branef.Empresas.Repositories</RootNamespace>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Branef.Empresas.DB\Branef.Empresas.DB.csproj" />
+    <ProjectReference Include="..\Branef.Empresas.Domain\Branef.Empresas.Domain.csproj" />
+  </ItemGroup>
+
+</Project>

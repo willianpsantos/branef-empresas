@@ -1,0 +1,31 @@
+.nz-drawer-subtitle {
+  color: #888;
+  margin-bottom: 16px;
+
+  font-family: Segoe UI;
+  font-size: 11px;
+  font-weight: 600;
+  line-height: 23.94px;
+  text-align: left;
+}
+
+.font-bolder {
+  font-weight: 700 !important;
+}
+
+*[nz-flex] {
+  gap: 10px;
+}
+
+table.children thead th {
+  text-align: left;
+}
+
+.child-buttons {
+  display: inline-flex;
+  flex-wrap: nowrap;
+}
+
+.child-buttons button {
+  height: 30px;
+}
