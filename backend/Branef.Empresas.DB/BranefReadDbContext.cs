@@ -1,5 +1,6 @@
 ﻿using Branef.Empresas.DB.EntityConfigurations.ReadDb;
 using Microsoft.EntityFrameworkCore;
+using MongoDB.Bson;
 
 namespace Branef.Empresas.DB
 {
@@ -7,7 +8,6 @@ namespace Branef.Empresas.DB
     {
         public BranefReadDbContext(DbContextOptions<BranefReadDbContext> options) : base(options)
         {
-
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)

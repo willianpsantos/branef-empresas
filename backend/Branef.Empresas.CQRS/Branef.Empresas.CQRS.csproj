@@ -1,0 +1,20 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="MediatR" Version="12.4.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Branef.Empresas.DB\Branef.Empresas.DB.csproj" />
+    <ProjectReference Include="..\Branef.Empresas.Domain\Branef.Empresas.Domain.csproj" />
+    <ProjectReference Include="..\Branef.Empresas.Repositories\Branef.Empresas.Repositories.csproj" />
+    <ProjectReference Include="..\Branef.Empresas.Services\Branef.Empresas.Services.csproj" />
+  </ItemGroup>
+
+</Project>

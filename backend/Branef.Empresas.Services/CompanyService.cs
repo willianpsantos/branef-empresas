@@ -72,7 +72,7 @@ namespace Branef.Empresas.Services
 
         public async ValueTask<CompanyModel> InsertAsync(InsertOrUpdateCompanyCommand model)
         {
-            var entity = _domainConverter.ToEntity(model);
+            var entity = _domainConverter.ToEntity(model, model.Id);
             var inserted = await _repository.InsertAsync(entity);            
 
             return _domainConverter.ToModel(inserted);

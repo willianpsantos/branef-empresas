@@ -25,7 +25,7 @@ namespace Branef.Empresas.Tests
             };
         }
 
-        private InsertOrUpdateCompanyCommand _ConvertToInsertOrUpdateSaleModel(CompanyModel model) =>
+        private InsertOrUpdateCompanyCommand _ConvertToInsertOrUpdateModel(CompanyModel model) =>
             new InsertOrUpdateCompanyCommand
             {
                 Id = model.Id,
@@ -95,7 +95,7 @@ namespace Branef.Empresas.Tests
             insertedModel.Name = newName;
             insertedModel.Size = newSize;            
 
-            var convertedInsertOrUpdateModel = _ConvertToInsertOrUpdateSaleModel(insertedModel);
+            var convertedInsertOrUpdateModel = _ConvertToInsertOrUpdateModel(insertedModel);
 
             Assert.That(convertedInsertOrUpdateModel, Is.Not.Null);
 

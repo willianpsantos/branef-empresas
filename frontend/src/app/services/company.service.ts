@@ -23,7 +23,7 @@ export class CompanyService
     this.baseUrl = `${this.apiUrl}/${this.apiVersion}/${this.baseUrl}`;
   }
 
-  listAll(options: ListOptions): Observable<PageResponse<CompanyModel>> {
+  listAll_v1(options: ListOptions): Observable<PageResponse<CompanyModel>> {
     const body = options.toBody();
 
     const prm = new HttpParams({
@@ -33,6 +33,18 @@ export class CompanyService
     return this
       .http
       .get<PageResponse<CompanyModel>>(`${this.baseUrl}/${options.page}/${options.take}/paginated/`, { params: prm });
+  }
+
+  listAll(options: ListOptions): Observable<PageResponse<CompanyModel>> {
+    const body = options.toBody();
+
+    const prm = new HttpParams({
+      fromObject: body
+    });
+
+    return this
+      .http
+      .get<PageResponse<CompanyModel>>(`${this.baseUrl}/paginated/`, { params: prm });
   }
 
   save(data: CompanyModel) : Observable<ApiResponse<CompanyModel>> {

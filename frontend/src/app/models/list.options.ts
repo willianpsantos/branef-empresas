@@ -8,7 +8,10 @@ export class ListOptions
   filters!: QueryFilter[];
 
   toBody() {
-    const body: { [key: string]: BodyValueType } = {};
+    const body: { [key: string]: BodyValueType } = {
+      'page' : this.page,
+      'pageSize': this.take
+    };
 
     if ((this.filters?.length ?? 0) == 0)
       return body;

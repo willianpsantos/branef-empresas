@@ -1,37 +1,32 @@
 using Asp.Versioning;
-using Branef.Empresas.DB;
-using Branef.Empresas.Domain.Interfaces.Services;
 using Branef.Empresas.Domain.Models;
 using Branef.Empresas.Domain.Queries;
 using FluentValidation;
+using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using System.Net;
 
-namespace Branef.Empresas.API.Controllers.v1
+namespace Branef.Empresas.API.Controllers.v2
 {
-    [ApiVersion("1")]
+    [ApiVersion("2")]
     [ApiController]
     [Route("api/v{version:apiVersion}/companies")]
     public class CompanyController : ControllerBase
     {
+        private readonly IMediator _mediator;
         private readonly ILogger<CompanyController> _logger;
-        private readonly ICompanyService<BranefWriteDbContext> _companyService;
-        private readonly ICompanyReplicationService _companyReplicationService;
         private readonly IValidator<InsertOrUpdateCompanyCommand> _companyCommandValidator;
 
         public CompanyController(
+            IMediator mediator,
             ILogger<CompanyController> logger,
-            ICompanyService<BranefWriteDbContext> companyService,
-            ICompanyReplicationService companyReplicationService,
             IValidator<InsertOrUpdateCompanyCommand> companyModelValidator
         )
         {
             _logger = logger;
-            _companyService = companyService;
+            _mediator = mediator;
             _companyCommandValidator = companyModelValidator;
-            _companyReplicationService = companyReplicationService;
         }
-
 
         /// <summary>
         /// Filter companies based on given query criterias.
@@ -40,12 +35,15 @@ namespace Branef.Empresas.API.Controllers.v1
         /// <returns> A list of companies and their products. </returns>
         /// <response code="200"> Success - return a list of companies </response>
         /// <response code="500"> Error - return the error that occurs during the process. </response>
-        [HttpGet()]        
-        public async Task<IActionResult> GetAsync([FromQuery] CompanyQuery? query = null)
+        [HttpGet()]
+        public async Task<IActionResult> GetAsync([FromQuery] GetCompaniesQuery? query = null)
         {
             try
             {
-                var companies = await _companyService.GetAsync(query);
+                if (query is null)
+                    query = new GetCompaniesQuery();
+
+                var companies = await _mediator.Send(query);
 
                 _logger.LogInformation("Companies got!");
 
@@ -67,12 +65,18 @@ namespace Branef.Empresas.API.Controllers.v1
         /// <returns> The total count of records, the page number and size, and the list of companies and their products. </returns>
         /// <response code="200"> Success - return a list of companies </response>
         /// <response code="500"> Error - return the error that occurs during the process. </response>
-        [HttpGet("{page}/{pageSize}/paginated")]
-        public async Task<IActionResult> GetPaginatedAsync(int page, int pageSize, [FromQuery] CompanyQuery? query = null)
+        [HttpGet("paginated")]
+        public async Task<IActionResult> GetPaginatedAsync([FromQuery] GetPaginatedCompaniesQuery? query = null)
         {
             try
             {
-                var companies = await _companyService.GetPaginatedAsync(page, pageSize, query);
+                if (query is null)
+                    query = new GetPaginatedCompaniesQuery();
+
+                if (query.Page == 0 || query.PageSize == 0)
+                    return BadRequest();
+
+                var companies = await _mediator.Send(query);
 
                 _logger.LogInformation("Paginated companies got!");
 
@@ -102,7 +106,7 @@ namespace Branef.Empresas.API.Controllers.v1
 
             try
             {
-                var company = await _companyService.GetByIdAsync(uuid);
+                var company = await _mediator.Send(new GetCompanyByIdQuery(uuid));
 
                 return Ok(company);
             }
@@ -135,13 +139,9 @@ namespace Branef.Empresas.API.Controllers.v1
 
             try
             {
-                var company = await _companyService.InsertAsync(model);
-
-                await _companyService.SaveChangesAsync();
+                var company = await _mediator.Send(model);
 
                 _logger.LogInformation("Company ID {0} inserted", company.Id);
-
-                await _companyReplicationService.ReplicateChangesAsync(company);
 
                 return Ok(company);
             }
@@ -178,13 +178,11 @@ namespace Branef.Empresas.API.Controllers.v1
 
             try
             {
-                var company = _companyService.Update(uuid, model);
+                model.Id = uuid;
 
-                await _companyService.SaveChangesAsync();
+                var company = _mediator.Send(model);
 
                 _logger.LogInformation("Company ID {0} updated", company.Id);
-                
-                await _companyReplicationService.ReplicateChangesAsync(company);
 
                 return Ok(company);
             }
@@ -212,14 +210,9 @@ namespace Branef.Empresas.API.Controllers.v1
 
             try
             {
-                var success = await _companyService.DeleteAsync(uuid);
-
-                await _companyService.SaveChangesAsync();
+                var success = await _mediator.Send(new DeleteCompanyCommand(uuid));
 
                 _logger.LogInformation("Company ID {0} deleted", id);
-
-                if (success)
-                    await _companyReplicationService.ReplicateDeletedASync(uuid);
 
                 return Ok(success);
             }

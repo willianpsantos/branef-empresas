@@ -1,15 +1,11 @@
 ﻿using Branef.Empresas.Data.Enums;
+using MediatR;
 using System.Text.Json.Serialization;
 
 namespace Branef.Empresas.Domain.Models
 {
-    public class InsertOrUpdateCompanyCommand
+    public record InsertOrUpdateCompanyCommand : IRequest<CompanyModel>
     {
-        public InsertOrUpdateCompanyCommand()
-        {
-            
-        }
-
         [JsonPropertyName("id")]
         public Guid? Id { get; set; }
 

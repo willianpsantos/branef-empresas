@@ -1,7 +1,10 @@
+using Branef.Empresas.API;
 using Branef.Empresas.DependencyInjection;
 using Branef.Empresas.Domain;
+using Microsoft.Extensions.Options;
 using Serilog;
 using Serilog.Events;
+using Swashbuckle.AspNetCore.SwaggerGen;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -58,7 +61,24 @@ Log.Logger = new LoggerConfiguration()
 
 builder.Services.AddSerilog(Log.Logger);
 
+builder.Services.AddMediatR(config =>
+{
+    config.RegisterServicesFromAssemblyContaining(typeof(Branef.Empresas.CQRS.Entry));
+});
 
+builder
+    .Services
+    .AddTransient<IConfigureOptions<SwaggerGenOptions>, ConfigureSwaggerOptions>();
+
+builder
+    .Services
+    .AddApiVersioning()
+    .AddApiExplorer();
+
+builder.Services.AddSwaggerGen(options =>
+{   
+    options.OperationFilter<SwaggerDefaultValues>();
+});
 
 var app = builder.Build();
 
@@ -69,7 +89,14 @@ if (app.Environment.IsDevelopment())
 
     app.UseSwaggerUI(opt =>
     {
-        opt.SwaggerEndpoint("/swagger/v1/swagger.json", "Sales API V1");
+        var descriptions = app.DescribeApiVersions();
+
+        foreach (var description in descriptions)
+        {
+            var url = $"/swagger/{description.GroupName}/swagger.json";
+            var name = description.GroupName.ToUpperInvariant();
+            opt.SwaggerEndpoint(url, name);
+        }
     });
 }
 

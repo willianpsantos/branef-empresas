@@ -9,11 +9,11 @@ namespace Branef.Empresas.Repositories
     public class CompanyRepository<TDbContext> : IRepository<Company, TDbContext> 
         where TDbContext : BranefDbContext<TDbContext>
     {
-        private readonly TDbContext _context;
+        protected readonly TDbContext _context;
 
         public CompanyRepository(TDbContext context) => _context = context;
 
-        private IQueryable<Company> GetBaseQuery(Expression<Func<Company, bool>>? query = default)
+        protected virtual IQueryable<Company> GetBaseQuery(Expression<Func<Company, bool>>? query = default)
         {
             IQueryable<Company> queryable =
                 (query is null)
@@ -23,14 +23,14 @@ namespace Branef.Empresas.Repositories
             return queryable;
         }
 
-        public async ValueTask<int> CountAsync(Expression<Func<Company, bool>>? query = default)
+        public virtual async ValueTask<int> CountAsync(Expression<Func<Company, bool>>? query = default)
         {
             IQueryable<Company> queryable = GetBaseQuery(query);
             
             return await queryable.CountAsync();
         }
 
-        public async IAsyncEnumerable<Company> GetAsync(
+        public virtual async IAsyncEnumerable<Company> GetAsync(
             Expression<Func<Company, bool>>? query = null, 
             int page = 0, 
             int pageSize = 0
@@ -51,13 +51,13 @@ namespace Branef.Empresas.Repositories
                 yield return item;
         }
 
-        public async ValueTask<Company?> GetByIdAsync(Guid id) => await 
+        public virtual async ValueTask<Company?> GetByIdAsync(Guid id) => await 
             _context
                 .Companies
                 .AsNoTracking()
                 .FirstOrDefaultAsync(_ => _.Id == id && !_.IsDeleted);
 
-        public async ValueTask<Company> InsertAsync(Company entity)
+        public virtual async ValueTask<Company> InsertAsync(Company entity)
         {
             if (entity.Id == Guid.Empty)
                 entity.Id = Guid.NewGuid();
@@ -70,7 +70,7 @@ namespace Branef.Empresas.Repositories
             return entry.Entity;
         }
 
-        public async ValueTask<Company> InsertAndSaveChangesAsync(Company entity)
+        public virtual async ValueTask<Company> InsertAndSaveChangesAsync(Company entity)
         {
             var insertedEntity = await InsertAsync(entity);
 
@@ -79,7 +79,7 @@ namespace Branef.Empresas.Repositories
             return insertedEntity;
         }
 
-        public Company Update(Company entity)
+        public virtual Company Update(Company entity)
         {
             if (entity.Id == Guid.Empty)
                 throw new InvalidOperationException("Entity has no ID");
@@ -100,7 +100,7 @@ namespace Branef.Empresas.Repositories
             return entity;
         }
 
-        public async ValueTask<Company> UpdateAndSaveChangesAsync(Company entity)
+        public virtual async ValueTask<Company> UpdateAndSaveChangesAsync(Company entity)
         {
             Update(entity);
 
@@ -109,7 +109,7 @@ namespace Branef.Empresas.Repositories
             return entity;
         }
 
-        public async ValueTask<bool> DeleteAsync(Guid id)
+        public virtual async ValueTask<bool> DeleteAsync(Guid id)
         {
             var affected = await _context
                 .Companies
@@ -122,7 +122,7 @@ namespace Branef.Empresas.Repositories
             return affected > 0;
         }
 
-        public async ValueTask<bool> DeleteAndSaveChangesAsync(Guid id)
+        public virtual async ValueTask<bool> DeleteAndSaveChangesAsync(Guid id)
         {
             var deleted = await DeleteAsync(id);
 
@@ -132,6 +132,6 @@ namespace Branef.Empresas.Repositories
             return deleted;
         }
 
-        public async ValueTask<int> SaveChangesAsync() => await _context.SaveChangesAsync();
+        public virtual async ValueTask<int> SaveChangesAsync() => await _context.SaveChangesAsync();
     }
 }

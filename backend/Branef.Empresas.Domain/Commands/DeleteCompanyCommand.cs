@@ -1,7 +1,11 @@
-﻿namespace Branef.Empresas.Domain.Models
+﻿using MediatR;
+
+namespace Branef.Empresas.Domain.Models
 {
-    public class DeleteCompanyCommand
+    public record DeleteCompanyCommand : IRequest<bool>
     {
+        public DeleteCompanyCommand(Guid id) => Id = id;
+
         public Guid Id { get; set; }
     }
 }
