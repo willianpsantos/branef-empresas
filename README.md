@@ -18,7 +18,7 @@ docker run --hostname=65839cecda03 --mac-address=02:42:ac:11:00:04 --env=PATH=/u
 
 # SQL Server
 
-docker run --hostname=225cba5a3bb0 --user=mssql --mac-address=02:42:ac:11:00:03 --env=ACCEPT_EULA=Y --env=MSSQL_SA_PASSWORD=@Wips294802 --env=PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin --env=MSSQL_RPC_PORT=135 --env=CONFIG_EDGE_BUILD= --env=MSSQL_PID=developer --network=bridge -p 1433:1433 --restart=no --label='com.microsoft.product=Microsoft SQL Server' --label='com.microsoft.version=16.0.4125.3' --label='org.opencontainers.image.ref.name=ubuntu' --label='org.opencontainers.image.version=22.04' --label='vendor=Microsoft' --runtime=runc -t -d mcr.microsoft.com/mssql/server:2022-latest
+docker run --hostname=225cba5a3bb0 --user=mssql --mac-address=02:42:ac:11:00:03 --env=ACCEPT_EULA=Y --env=MSSQL_SA_PASSWORD=[YOUR PASSWORD] --env=PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin --env=MSSQL_RPC_PORT=135 --env=CONFIG_EDGE_BUILD= --env=MSSQL_PID=developer --network=bridge -p 1433:1433 --restart=no --label='com.microsoft.product=Microsoft SQL Server' --label='com.microsoft.version=16.0.4125.3' --label='org.opencontainers.image.ref.name=ubuntu' --label='org.opencontainers.image.version=22.04' --label='vendor=Microsoft' --runtime=runc -t -d mcr.microsoft.com/mssql/server:2022-latest
 
 
 [1] Create databases
